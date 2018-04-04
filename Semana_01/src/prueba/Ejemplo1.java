@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Ejemplo1 extends JFrame {
 
@@ -18,6 +20,7 @@ public class Ejemplo1 extends JFrame {
 	private JMenuItem mntmRojo;
 	private JMenuItem mntmVerde;
 	private JMenuItem mntmAzul;
+	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -55,12 +58,37 @@ public class Ejemplo1 extends JFrame {
 		menuBar.add(mnMenu);
 		
 		mntmRojo = new JMenuItem("ROJO");
+		mntmRojo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actionPerformedMntmRojo(arg0);
+			}
+		});
 		mnMenu.add(mntmRojo);
 		
 		mntmVerde = new JMenuItem("AMARILLO");
+		mntmVerde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actionPerformedMntmVerde(arg0);
+			}
+		});
 		mnMenu.add(mntmVerde);
 		
 		mntmAzul = new JMenuItem("AZUL");
+		mntmAzul.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				actionPerformedMntmAzul(arg0);
+			}
+		});
 		mnMenu.add(mntmAzul);
+		
+		panel = new JPanel();
+		panel.setBounds(0, 21, 475, 299);
+		contentPane.add(panel);
+	}
+	protected void actionPerformedMntmRojo(ActionEvent arg0) {
+	}
+	protected void actionPerformedMntmVerde(ActionEvent arg0) {
+	}
+	protected void actionPerformedMntmAzul(ActionEvent arg0) {
 	}
 }
