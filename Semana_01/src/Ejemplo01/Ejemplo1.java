@@ -1,6 +1,8 @@
-package prueba;
+package Ejemplo01;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Container;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -20,7 +22,6 @@ public class Ejemplo1 extends JFrame {
 	private JMenuItem mntmRojo;
 	private JMenuItem mntmVerde;
 	private JMenuItem mntmAzul;
-	private JPanel panel;
 
 	/**
 	 * Launch the application.
@@ -80,15 +81,17 @@ public class Ejemplo1 extends JFrame {
 			}
 		});
 		mnMenu.add(mntmAzul);
-		
-		panel = new JPanel();
-		panel.setBounds(0, 21, 475, 299);
-		contentPane.add(panel);
 	}
 	protected void actionPerformedMntmRojo(ActionEvent arg0) {
+		Container f=this.getContentPane();
+		f.setBackground(new Color(255, 0, 0));
 	}
 	protected void actionPerformedMntmVerde(ActionEvent arg0) {
+		Container f=this.getContentPane();
+		f.setBackground(new Color(255,255,0));
 	}
 	protected void actionPerformedMntmAzul(ActionEvent arg0) {
+		Container f=this.getContentPane();
+		f.setBackground(new Color(0, 0, 255));
 	}
 }
