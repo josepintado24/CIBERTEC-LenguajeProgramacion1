@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -12,6 +13,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.ListSelectionModel;
 
 public class TestEjercicios extends JFrame implements ActionListener {
 
@@ -19,7 +24,9 @@ public class TestEjercicios extends JFrame implements ActionListener {
 	private JComboBox cboNumeros;
 	private JButton btnNewButton;
 	private JLabel lblNewLabel;
-
+	private JScrollPane scrollPane;
+	DefaultTableModel modelo = new DefaultTableModel();
+	private JTable table;
 	/**
 	 * Launch the application.
 	 */
@@ -60,8 +67,23 @@ public class TestEjercicios extends JFrame implements ActionListener {
 		contentPane.add(btnNewButton);
 		
 		lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(70, 136, 292, 14);
+		lblNewLabel.setBounds(70, 75, 292, 14);
 		contentPane.add(lblNewLabel);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(20, 122, 384, 117);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		
+		modelo.addColumn("Empleado");
+		modelo.addColumn("Cargo");
+		modelo.addColumn("Sueldo Liquidación");
+		modelo.addColumn("Familiar");
+		modelo.addColumn("Beneficio");
+		modelo.addColumn("Neto");
+		scrollPane.setViewportView(table);
+		table.setModel(modelo);
 	}
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnNewButton) {
@@ -77,6 +99,7 @@ public class TestEjercicios extends JFrame implements ActionListener {
 		else if("dos"==item) {
 			lblNewLabel.setText("dos");
 		}
+		modelo.addRow(new Object[]{"hola", "hola"});
 		
 	}
 }

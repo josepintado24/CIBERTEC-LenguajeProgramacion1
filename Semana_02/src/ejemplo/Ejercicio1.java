@@ -195,6 +195,6 @@ public class Ejercicio1 extends JFrame {
 		if(chckbxSinAccidentes.isSelected())beneficio+=4500;
 		if(chckbxSinIncidencias.isSelected())beneficio+=3500;
 		
-		modelo.addRow(new Object[]{empleado,cargo,sueldo,familiar,beneficio,(sueldo+familiar+beneficio)});
+		modelo.addRow(new Object[]{"hola"});
 	}
 }
