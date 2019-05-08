@@ -6,12 +6,21 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Hilos.HiloEnvio;
+
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
 
-public class Editor extends JFrame {
+public class Editor extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
+	private JButton btnEnviar;
+	private JScrollPane scrollPane;
+	private JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -41,12 +50,29 @@ public class Editor extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnEnviar = new JButton("Enviar");
+		btnEnviar = new JButton("Enviar");
+		btnEnviar.addActionListener(this);
 		btnEnviar.setBounds(26, 213, 89, 23);
 		contentPane.add(btnEnviar);
 		
-		JTextArea txtEditor = new JTextArea();
-		txtEditor.setBounds(26, 38, 367, 151);
-		contentPane.add(txtEditor);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(26, 11, 398, 191);
+		contentPane.add(scrollPane);
+		
+		textArea = new JTextArea();
+		scrollPane.setViewportView(textArea);
+	}
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == btnEnviar) {
+			actionPerformedBtnEnviar(e);
+		}
+	}
+	protected void actionPerformedBtnEnviar(ActionEvent e) {
+		HiloEnvio hiloEnv1=new HiloEnvio("Cliente1", textArea);
+		hiloEnv1.start();
+		HiloEnvio hiloEnv2=new HiloEnvio("Cliente2", textArea);
+		
+		hiloEnv2.start();
+		
 	}
 }

@@ -1,4 +1,4 @@
-package ThreadBasicoContador;
+package _1ThreadBasicoContador;
 
 import javax.swing.JLabel;
 

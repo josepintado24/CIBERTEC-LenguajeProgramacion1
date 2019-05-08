@@ -58,7 +58,7 @@ public class FrmPrincipal extends JFrame {
 		contentPane.add(escritorio, BorderLayout.CENTER);
 		
 		JInternalFrame reloj = new JInternalFrame("");
-		reloj.setBounds(58, 164, 131, 55);
+		reloj.setBounds(62, 24, 131, 55);
 		escritorio.add(reloj);
 		
 		lblReloj = new JLabel("00:00:00");
