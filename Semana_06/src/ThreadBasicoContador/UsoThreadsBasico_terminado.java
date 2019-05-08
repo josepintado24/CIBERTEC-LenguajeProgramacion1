@@ -1,5 +1,5 @@
 
-package prueba;
+package ThreadBasicoContador;
 import java.awt.geom.*;
 
 import javax.swing.*;
