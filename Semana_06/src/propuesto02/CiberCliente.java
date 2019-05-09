@@ -77,7 +77,6 @@ public class CiberCliente extends JFrame implements ActionListener {
 		}
 	}
 	void enviarMensaje(){
-		String host
 	}
 	protected void actionPerformedBtnEnviar(ActionEvent e) {
 	}
