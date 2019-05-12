@@ -5,7 +5,7 @@ import java.sql.*;
 public class ConexionBD_Mysql {
 
 	private static final String bd="tienda";
-	private static final String url="jdbc:mysql://localhost/tienda";
+	private static final String url="jdbc:mysql://localhost/cursophp";
 	private static final String driver="com.mysql.jdbc.Driver";
 	private static final String user="root";
 	private static final String password="";
@@ -18,10 +18,10 @@ public class ConexionBD_Mysql {
 				cnn=DriverManager.getConnection(url,user,password);
 				System.out.println("Exitoso");
 				Statement st=cnn.createStatement();
-				ResultSet rs =st.executeQuery("select * fron Clientes");
+				ResultSet rs =st.executeQuery("select * from estudiante");
 				
 			while (rs.next()) {
-					System.out.println(rs.getString("telefono"));
+					System.out.println(rs.getString("nombre"));
 					}
 				
 				
