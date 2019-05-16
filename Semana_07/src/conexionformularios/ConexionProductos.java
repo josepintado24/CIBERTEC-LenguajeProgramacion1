@@ -52,6 +52,15 @@ public class ConexionProductos {
 		return rs;
 		
 	}
+	public static void insrtar(String sql){
+		try {
+			st.executeUpdate(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 }

@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class FrmProductos extends JFrame implements ActionListener {
 
@@ -23,6 +24,11 @@ public class FrmProductos extends JFrame implements ActionListener {
 	private JScrollPane scrollPane;
 	private JTable table;
 	DefaultTableModel modelo = new DefaultTableModel();
+	private JTextField txtId;
+	private JTextField txtNombre;
+	private JTextField txtCodigo;
+	private JTextField txtProveedor;
+	private JButton btnAgregar;
 	/**
 	 * Launch the application.
 	 */
@@ -44,19 +50,19 @@ public class FrmProductos extends JFrame implements ActionListener {
 	 */
 	public FrmProductos() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 542, 464);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		btnOk = new JButton("OK");
+		btnOk = new JButton("Listar");
 		btnOk.addActionListener(this);
-		btnOk.setBounds(283, 24, 89, 23);
+		btnOk.setBounds(10, 153, 89, 23);
 		contentPane.add(btnOk);
 		
 		scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 86, 400, 164);
+		scrollPane.setBounds(10, 184, 494, 230);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
@@ -66,13 +72,45 @@ public class FrmProductos extends JFrame implements ActionListener {
 		modelo.addColumn("CODIGO");
 		modelo.addColumn("PROVEEDOR");
 		scrollPane.setViewportView(table);
+		
+		txtId = new JTextField();
+		txtId.setBounds(111, 11, 86, 20);
+		contentPane.add(txtId);
+		txtId.setColumns(10);
+		
+		txtNombre = new JTextField();
+		txtNombre.setBounds(111, 42, 86, 20);
+		contentPane.add(txtNombre);
+		txtNombre.setColumns(10);
+		
+		txtCodigo = new JTextField();
+		txtCodigo.setBounds(111, 74, 86, 20);
+		contentPane.add(txtCodigo);
+		txtCodigo.setColumns(10);
+		
+		txtProveedor = new JTextField();
+		txtProveedor.setBounds(111, 109, 86, 20);
+		contentPane.add(txtProveedor);
+		txtProveedor.setColumns(10);
+		
+		btnAgregar = new JButton("Agregar");
+		btnAgregar.addActionListener(this);
+		btnAgregar.setBounds(285, 10, 89, 23);
+		contentPane.add(btnAgregar);
 	}
 	public void actionPerformed(ActionEvent arg0) {
+		if (arg0.getSource() == btnAgregar) {
+			actionPerformedBtnAgregar(arg0);
+		}
 		if (arg0.getSource() == btnOk) {
 			actionPerformedBtnOk(arg0);
 		}
 	}
+	
+	
 	protected void actionPerformedBtnOk(ActionEvent arg0) {
+		
+		
 		ConexionProductos.iniciar();
 		
 				try {
@@ -90,5 +128,17 @@ public class FrmProductos extends JFrame implements ActionListener {
 					e.printStackTrace();
 				}
 		
+	}
+	protected void actionPerformedBtnAgregar(ActionEvent arg0) {
+		int id=Integer.parseInt(txtId.getText());
+		String nombre=txtNombre.getText();
+		String codigo=txtCodigo.getText();
+		String proveedor=txtProveedor.getText();
+		ConexionProductos.insrtar("INSERT INTO PRODUCTOS(ID,NOMBRE,CODIGO,PROVEEDOR)VALUES("+
+									id+",'"+
+									nombre+"','"+
+									codigo+"','"+
+									proveedor+"'"
+									);
 	}
 }

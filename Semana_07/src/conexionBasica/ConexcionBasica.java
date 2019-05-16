@@ -5,6 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.*;
+
+import com.mysql.jdbc.PreparedStatement;
 
 public class ConexcionBasica {
 	private static final String url="jdbc:mysql://localhost/TIENDA";
@@ -25,7 +28,7 @@ public class ConexcionBasica {
 		try {
 			
 			conexionBD = DriverManager.getConnection(url,user,pass);
-			st=conexionBD.createStatement();
+			
 			System.out.println("Conexion esxitosa");
 		} catch (SQLException e) {
 			System.out.println("Error de Conexion"+e);
@@ -34,7 +37,7 @@ public class ConexcionBasica {
 	}
 	public void mostrar(){
 		try {
-			
+			st=conexionBD.createStatement();
 			ResultSet rs=st.executeQuery("SELECT * FROM PRODUCTOS");
 			while (rs.next()) {
 				System.out.println(
@@ -52,9 +55,14 @@ public class ConexcionBasica {
 		
 	}
 	public void insertar(){
-		String instruccionSql="INSERT INTO PRODUCTOS(ID,NOMBRE,CODIGO,PROVEEDOR)VALUES(11,'CARTUCHERA','898989','MUGUEL SAC')";
+		//String instruccionSql="INSERT INTO PRODUCTOS(ID,NOMBRE,CODIGO,PROVEEDOR)VALUES(11,'CARTUCHERA','898989','MUGUEL SAC')";
+		
+		
 		try {
-			st.executeUpdate(instruccionSql);
+			String instruccionSql="INSERT INTO PRODUCTOS(ID,NOMBRE,CODIGO,PROVEEDOR)VALUES(?,?,?,?)";
+			PreparedStatement pps=(PreparedStatement) conexionBD.prepareStatement(instruccionSql);
+			//pps.set
+			//st.executeUpdate(instruccionSql);
 			System.out.println("Datos Insertado");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
