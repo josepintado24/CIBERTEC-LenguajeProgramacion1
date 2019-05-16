@@ -12,16 +12,20 @@ public class ConexcionBasica {
 	private static final String user="root";
 	private static final String pass="2303@pintado";
 	static Connection conexionBD;
+	static Statement st;
 	
 	public static void main(String[] arg){
 		ConexcionBasica conBas = new ConexcionBasica();
+		conBas.insertar();
 		conBas.mostrar();
 	}
 	
 	
 	public ConexcionBasica(){
 		try {
+			
 			conexionBD = DriverManager.getConnection(url,user,pass);
+			st=conexionBD.createStatement();
 			System.out.println("Conexion esxitosa");
 		} catch (SQLException e) {
 			System.out.println("Error de Conexion"+e);
@@ -30,8 +34,8 @@ public class ConexcionBasica {
 	}
 	public void mostrar(){
 		try {
-			Statement st=conexionBD.createStatement();
-			ResultSet rs=st.executeQuery("SELECT * FROM PRODUCTOS WHERE NOMBRE='JABON'");
+			
+			ResultSet rs=st.executeQuery("SELECT * FROM PRODUCTOS");
 			while (rs.next()) {
 				System.out.println(
 						"ID\t:"+rs.getString("ID")+
@@ -48,7 +52,14 @@ public class ConexcionBasica {
 		
 	}
 	public void insertar(){
-		
+		String instruccionSql="INSERT INTO PRODUCTOS(ID,NOMBRE,CODIGO,PROVEEDOR)VALUES(11,'CARTUCHERA','898989','MUGUEL SAC')";
+		try {
+			st.executeUpdate(instruccionSql);
+			System.out.println("Datos Insertado");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
 
