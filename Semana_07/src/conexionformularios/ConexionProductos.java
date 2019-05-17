@@ -2,6 +2,7 @@ package conexionformularios;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -52,9 +53,14 @@ public class ConexionProductos {
 		return rs;
 		
 	}
-	public static void insrtar(String sql){
+	public static void insrtar(String sql,int id, String nombre, String codigo, String proveedor){
 		try {
-			st.executeUpdate(sql);
+			PreparedStatement pps=cnn.prepareStatement(sql);
+			pps.setInt(1, id);
+			pps.setString(2, nombre);
+			pps.setString(3, codigo);
+			pps.setString(4, proveedor);
+			pps.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

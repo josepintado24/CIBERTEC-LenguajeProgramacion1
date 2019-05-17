@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
@@ -109,8 +110,6 @@ public class FrmProductos extends JFrame implements ActionListener {
 	
 	
 	protected void actionPerformedBtnOk(ActionEvent arg0) {
-		
-		
 		ConexionProductos.iniciar();
 		
 				try {
@@ -130,15 +129,17 @@ public class FrmProductos extends JFrame implements ActionListener {
 		
 	}
 	protected void actionPerformedBtnAgregar(ActionEvent arg0) {
+		ConexionProductos.iniciar();
 		int id=Integer.parseInt(txtId.getText());
 		String nombre=txtNombre.getText();
 		String codigo=txtCodigo.getText();
 		String proveedor=txtProveedor.getText();
-		ConexionProductos.insrtar("INSERT INTO PRODUCTOS(ID,NOMBRE,CODIGO,PROVEEDOR)VALUES("+
-									id+",'"+
-									nombre+"','"+
-									codigo+"','"+
-									proveedor+"'"
-									);
+		String instruccionSql="INSERT INTO PRODUCTOS(ID,NOMBRE,CODIGO,PROVEEDOR)VALUES(?,?,?,?)";
+		ConexionProductos.insrtar(instruccionSql,id,nombre,codigo,proveedor);
+		//
+		
+		
+		
+		
 	}
 }

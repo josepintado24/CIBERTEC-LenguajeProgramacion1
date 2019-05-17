@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.*;
 
 import com.mysql.jdbc.PreparedStatement;
 
@@ -36,6 +35,7 @@ public class ConexcionBasica {
 		}
 	}
 	public void mostrar(){
+		
 		try {
 			st=conexionBD.createStatement();
 			ResultSet rs=st.executeQuery("SELECT * FROM PRODUCTOS");
@@ -55,14 +55,12 @@ public class ConexcionBasica {
 		
 	}
 	public void insertar(){
-		//String instruccionSql="INSERT INTO PRODUCTOS(ID,NOMBRE,CODIGO,PROVEEDOR)VALUES(11,'CARTUCHERA','898989','MUGUEL SAC')";
+		String instruccionSql="INSERT INTO PRODUCTOS(ID,NOMBRE,CODIGO,PROVEEDOR)VALUES(11,'CARTUCHERA','898989','MUGUEL SAC')";
 		
 		
 		try {
-			String instruccionSql="INSERT INTO PRODUCTOS(ID,NOMBRE,CODIGO,PROVEEDOR)VALUES(?,?,?,?)";
-			PreparedStatement pps=(PreparedStatement) conexionBD.prepareStatement(instruccionSql);
-			//pps.set
-			//st.executeUpdate(instruccionSql);
+			instruccionSql="";
+			st.executeUpdate(instruccionSql);
 			System.out.println("Datos Insertado");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
