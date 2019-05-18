@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
-public class Prueba {
+public class PruebaConsultasPreparadas {
 	private static final String url="jdbc:mysql://localhost/TIENDA";
 	private static final String driver="com.mysql.jdbc.Driver";
 	private static final String user="root";
