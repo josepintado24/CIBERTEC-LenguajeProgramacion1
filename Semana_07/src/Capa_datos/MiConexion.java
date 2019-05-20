@@ -12,7 +12,7 @@ public class MiConexion {
 	//usuario y pass de base de datos sql
 	static String login = "sa";
 	static String password = "2303@pintado";
-	static String url = "jdbc:sqlserver://localhost\\MSSQLSERVER:1433;databaseName= Maderera_Chepen";
+	static String url = "jdbc:sqlserver://DESKTOP-D5F5DVC\\DEVELOPER;databaseName=Maderera_Chepen";
 
 	//el puente entre aplicacion y bd
 	
@@ -27,7 +27,7 @@ public class MiConexion {
 			con = DriverManager.getConnection(url,login,password);
 			JOptionPane.showMessageDialog(null, "Conexion correctamente");
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			System.out.println(e.getMessage());
 		}
 	
 		

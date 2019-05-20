@@ -8,6 +8,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Capa_datos.Conexion;
+import Capa_entidad.Cls_Trabajador;
+import conexionformularios.ConexionProductos;
 
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -17,6 +19,8 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -30,11 +34,11 @@ public class Consulta_Trabajador extends JFrame implements ActionListener {
 	private JTable tblConsulta;
 	
 	private DefaultTableModel modelo;
-	
-	Conexion cibertec = new Conexion();
 	private JButton btnVarones;
 	private JButton btnMujeres;
 	private JButton btnTodos;
+	private static Cls_Trabajador clsT;
+	private static ResultSet resultSet;
 
 	/**
 	 * Launch the application.
@@ -46,6 +50,7 @@ public class Consulta_Trabajador extends JFrame implements ActionListener {
 					Consulta_Trabajador frame = new Consulta_Trabajador();
 					frame.setVisible(true);
 					frame.setLocationRelativeTo(null);
+					clsT=new Cls_Trabajador();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -60,9 +65,6 @@ public class Consulta_Trabajador extends JFrame implements ActionListener {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent arg0) {
-				
-				cibertec.getConnection();
-				
 			}
 		});
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -137,9 +139,39 @@ public class Consulta_Trabajador extends JFrame implements ActionListener {
 		}
 	}
 	protected void actionPerformedBtnVarones(ActionEvent arg0) {
+		ResultSet resultSet = clsT.consulta("SELECT * FROM TRABAJADORES WHERE SEXO='true'");
+		mostrar(resultSet);
 	}
 	protected void actionPerformedBtnMujeres(ActionEvent arg0) {
+		ResultSet resultSet = clsT.consulta("SELECT * FROM TRABAJADORES WHERE SEXO='false'");
+		mostrar(resultSet);
+	}
+	
+	private void mostrar(ResultSet resultSet){
+		modelo.setRowCount(0);
+		try {
+			
+			while (resultSet.next()) {
+				modelo.addRow(new Object[]{
+						resultSet.getString(1),
+						resultSet.getString(2),
+						resultSet.getString(3),
+						resultSet.getString(4),
+						resultSet.getString(5),
+						resultSet.getString(6),
+						resultSet.getString(7),
+						resultSet.getString(8),
+						resultSet.getString(9),
+						resultSet.getString(10)
+				});
+				}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	protected void actionPerformedBtnTodos(ActionEvent arg0) {
+		ResultSet resultSet = clsT.consulta("SELECT * FROM TRABAJADORES");
+		mostrar(resultSet);
 	}
 }
