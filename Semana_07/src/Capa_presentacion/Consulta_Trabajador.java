@@ -23,8 +23,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import java.awt.event.KeyListener;
+import java.awt.event.KeyEvent;
 
-public class Consulta_Trabajador extends JFrame implements ActionListener {
+public class Consulta_Trabajador extends JFrame implements ActionListener, KeyListener {
 
 	/**
 	 * 
@@ -39,6 +42,8 @@ public class Consulta_Trabajador extends JFrame implements ActionListener {
 	private JButton btnTodos;
 	private static Cls_Trabajador clsT;
 	private static ResultSet resultSet;
+	private JTextField textField;
+	private JLabel lblOk;
 
 	/**
 	 * Launch the application.
@@ -126,6 +131,16 @@ public class Consulta_Trabajador extends JFrame implements ActionListener {
 		lblCant.setBackground(Color.DARK_GRAY);
 		lblCant.setBounds(305, 387, 22, 14);
 		contentPane.add(lblCant);
+		
+		textField = new JTextField();
+		textField.addKeyListener(this);
+		textField.setBounds(54, 65, 86, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		lblOk = new JLabel("ok");
+		lblOk.setBounds(54, 11, 46, 14);
+		contentPane.add(lblOk);
 	}
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == btnTodos) {
@@ -173,5 +188,19 @@ public class Consulta_Trabajador extends JFrame implements ActionListener {
 	protected void actionPerformedBtnTodos(ActionEvent arg0) {
 		ResultSet resultSet = clsT.consulta("SELECT * FROM TRABAJADORES");
 		mostrar(resultSet);
+	}
+	public void keyPressed(KeyEvent arg0) {
+	}
+	public void keyReleased(KeyEvent arg0) {
+		if (arg0.getSource() == textField) {
+			keyReleasedTextField(arg0);
+		}
+	}
+	public void keyTyped(KeyEvent arg0) {
+	}
+	protected void keyReleasedTextField(KeyEvent arg0) {
+		ResultSet resultSet = clsT.consulta("SELECT * FROM TRABAJADORES WHERE APELLIDO LIKE"+"'"+textField.getText()+"%'");
+		mostrar(resultSet);
+		
 	}
 }

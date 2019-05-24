@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class EscribirFichero {
 	public void Escribir(){
-		String texto="Juan";
+		String texto="Jose";
 		try {
 			FileWriter leer =new FileWriter("ejemplo1.txt",true);
 			for (int i=0;i<texto.length();i++){
